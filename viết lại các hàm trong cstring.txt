@@ -1,0 +1,123 @@
+//Tìm chuỗi s1 trong chuỗi s, nếu tìm thấy thì trả về vị trí của ký tự đầu tiên của chuỗi s1  (tức s1[0]) trong chuỗi s, nếu không tìm thấy trả về -1
+int myStrstr(char s1[],char s2[])
+{
+    int l1=strlen(s1);
+    int l2=strlen(s2);
+    bool check;
+    for(int i=0;i<l2;i++)
+        if(s2[i]==s1[0])
+        {
+            check = true;
+            for(int index1=0, index2= i; index1<l1 ; index1++, index2++)
+                if(s1[index1]!=s2[index2])
+                {
+                    check = false;
+                    break;
+                }
+            if(check==true)
+                return i;
+        }
+    return -1;
+}
+
+//Hàm trả về chiều dài chuỗi con của s kể từ vị trí k đến cuối chuỗi s, nếu muốn tìm độ dài của chuỗi s thì thực hiện lời gọi hàm myStrlen(s,0)
+int myStrcmp(char s1[], char s2[])
+{
+    int n = 0;
+	while (s1[n] != '\0' || s2[n] != '\0')
+	{
+		if (s1[n] > s2[n])
+			return 1;
+		else if (s1[n] < s2[n])
+			return -1;
+		n++;
+	};
+	return 0;
+}
+
+//Hàm trả về chiều dài chuỗi con của s kể từ vị trí k đến cuối chuỗi s, nếu muốn tìm độ dài của chuỗi s thì thực hiện lời gọi hàm myStrlen(s,0)
+int myStrlen(char s[], int k)
+{
+	while (s[k] != '\0')
+		k++;
+	return k;
+}
+
+//Copy chuỗi con của s tính từ vị trí k đến cuối chuỗi s vào trị ví vt của chuỗi s1
+void myStrcpy(char s1[], int vt , char s[], int k){
+    for (int i=vt, j=k; j<myStrlen(s,0); i++, j++)
+        s1[i]=s[j];
+    s1[myStrlen(s,0)]='\0';
+}
+
+// tìm vị trí xuất hiện đầu tiên của s1 trong chuỗi s2[]
+int myStrchar(char s1,char s2[]) 
+{
+    int l2=strlen(s2);
+    for(int i=0;i<l2;i++)
+        if(s2[i]==s1)
+            return i;
+    return -1;
+}
+
+//Tách 1 chuỗi con ra khoi chuoi s bằng cách lấy count ký tự bắt đầu từ vị trí b (chuỗi s bị mất phần đã tách), chuỗi con tách ra được sẽ lưu vào chuỗi ss
+void mySubstr(char s[], int b, int count, char ss[])
+{
+    for (int i=b, num=0; num<count; i++, num++)
+    {
+        ss[num]=s[i];
+    }
+    ss[count]='\0';
+}
+
+//Xóa k ký tự trong chuỗi s, bắt đầu từ vị trí vt
+void myMemmove(char s[], int vt, int k)
+{
+    int n=myStrlen(s,0);
+    for(int i=vt; i<n-k ;i++)
+        s[i]=s[i+k];
+    s[n-k]='\0';
+}
+
+// khoảng trắng dư thừa theo string c++
+void xoa(string &str)
+{
+    while (str[0] == ' ')
+		str.erase(0, 1);
+    while (str[str.length() - 1] == ' ')
+		str.erase(str.length() - 1, 1);
+    int n=str.size();
+    for (int i=0; i<n; i++)
+        if (str[i]==' ' && str[i+1]==' ')
+        {
+            for (int j=i; j<n-1;j ++)
+                str[j]=str[j+1];
+            i--;
+            str.erase(n-1,1);
+            n--;
+        }
+}
+
+// khoảng trắng dư thừa theo cstring
+void xoa(char s[],int vitrixoa)
+{
+	int n=strlen(s);
+    for(int i=vitrixoa;i<n;i++)
+        s[i]=s[i+1];
+	s[n-1]='\0'; 
+}
+void Chuanhoa(char str[MAX])
+{
+    while (str[0] == ' ')
+		xoa(str,0);
+    while (str[strlen(str) - 1] == ' ')
+		str[strlen(str)-1]='\0';
+	int n=strlen(str);
+    for (int i=0; i<n; i++)
+        if (str[i]==' ' && str[i+1]==' ')
+        {
+            xoa(str,i);
+            n--;
+            i--;
+        }
+}
